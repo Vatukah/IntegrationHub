@@ -53,7 +53,7 @@ export async function getGmailTokens(userId, code) {
     throw error;
   }
 
-  console.log(`✅ Gmail tokens saved for user: ${userId}`);
+  
   return tokens;
 }
 
