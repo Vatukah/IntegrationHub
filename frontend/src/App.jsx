@@ -34,7 +34,7 @@ function ProtectedRoute({ element }) {
 const router = createBrowserRouter([
   { path: "/", element: <><Navbar /><LandingPage /></> },
   { path: "/login", element: <LoginRedirect /> }, // redirect after login
-  { path: "/dashboard", element: <><Navbar /><ProtectedRoute element={<Dashboard />} /></> },
+  
   { path: "/gmail/connect", element: <><Navbar /><ProtectedRoute element={<GmailConnect />} /></> },
   { path: "/gmail/send", element: <><Navbar /><ProtectedRoute element={<GmailSend />} /></> },
   { path: "/gmail/callback", element:<GmailCallback />  },
