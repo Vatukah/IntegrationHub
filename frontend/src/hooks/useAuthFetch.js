@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react";
-
+import { API_ENDPOINTS } from "../config/endpoints";
 export function useAuthFetch() {
   const {
     getAccessTokenSilently,
@@ -53,8 +53,8 @@ export function useAuthFetch() {
     const token = await getAccessTokenSilently({
       audience: import.meta.env.VITE_AUTH0_AUDIENCE,
     });
-    const url =import.meta.env.VITE_GOOGLE_CALLBACK_URL
-    const res = await fetch('http://localhost:4000/api/gmail/callback', {
+    
+    const res = await fetch(API_ENDPOINTS.GOOGLE_CALLBACK, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAuthFetch } from "../hooks/useAuthFetch";
+import { API_ENDPOINTS } from "../config/endpoints.js";
 
 export default function GmailConnect() {
   const { authFetch } = useAuthFetch();
@@ -10,7 +11,7 @@ export default function GmailConnect() {
   // Fetch Gmail OAuth URL from backend
   const fetchAuthUrl = async () => {
     try {
-      const data = await authFetch("http://localhost:4000/api/gmail/connect");
+      const data = await authFetch(API_ENDPOINTS.GOOGLE_CONNECT);
       setAuthUrl(data.authUrl);
     } catch (err) {
       console.error(err);
@@ -20,7 +21,7 @@ export default function GmailConnect() {
 
   const fetchGmailConnection = async()=>{
 
-    const {data} = await authFetch("http://localhost:4000/user/getGmail",{
+    const {data} = await authFetch(API_ENDPOINTS.USER.GET_CONNECTED_GMAIL,{
       method:"GET"
     })
    console.log(data)

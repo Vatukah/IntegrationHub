@@ -1,9 +1,9 @@
 import { ArrowRight, Play, Zap, Workflow, Plug, Bot } from "lucide-react";
 import { useTheme } from "../contexts/ThemeContext";
-
+import { BASE_URL } from "../config/endpoints";
 export default function LandingPage() {
   const { theme } = useTheme();
-
+   console.log(BASE_URL)
   return (
     <div
       className={`min-h-screen w-full overflow-x-hidden transition-colors duration-300 ${

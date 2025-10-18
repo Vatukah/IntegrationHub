@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuthState } from "../contexts/AuthContext";
 import { useAuthFetch } from "../hooks/useAuthFetch";
 import { useAuth0 } from "@auth0/auth0-react";
+import { API_ENDPOINTS } from "../config/endpoints";
 
 export default function GmailSend() {
   const { authFetch } = useAuthFetch();
@@ -25,7 +26,7 @@ export default function GmailSend() {
     }
 
     try {
-      const res = await authFetch("http://localhost:4000/api/gmail/send", {
+      const res = await authFetch(API_ENDPOINTS.GOOGLE_SEND, {
         method: "POST",
         body: JSON.stringify({ to, subject, body }),
       });

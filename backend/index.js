@@ -11,12 +11,24 @@ const app = express();
 app.use(express.json());
 
 // Allow requests from your frontend
-app.use(cors({
-  origin: "http://localhost:5173", // frontend URL
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  credentials: true, // if you want cookies (not needed for token auth)
-}));
+const allowedOrigins = [
+  "http://localhost:5173",          // Local development
+  "https://integration-hub-ippe.vercel.app"   // Production frontend       // Custom domain (optional)
+];
 
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true, // required if you're using cookies or sessions
+  })
+);
 
 app.use("/actions", actionsRouter);
 app.use("/api/gmail", gmailRouter);
