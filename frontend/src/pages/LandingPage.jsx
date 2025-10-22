@@ -1,9 +1,16 @@
 import { ArrowRight, Play, Zap, Workflow, Plug, Bot } from "lucide-react";
 import { useTheme } from "../contexts/ThemeContext";
 import { BASE_URL } from "../config/endpoints";
+import { useEffect ,useState} from "react";
 export default function LandingPage() {
+   const [message, setMessage] = useState('');
   const { theme } = useTheme();
-   console.log(BASE_URL)
+     useEffect(() => {
+        fetch('/api/my-edge-function')
+          .then(res => res.text())
+          .then(data => setMessage(data))
+          .catch(error => console.error('Error fetching Edge Function:', error));
+      }, []);
   return (
     <div
       className={`min-h-screen w-full overflow-x-hidden transition-colors duration-300 ${
@@ -12,6 +19,7 @@ export default function LandingPage() {
           : "text-gray-900 bg-gradient-to-br from-gray-50 via-white to-gray-100"
       }`}
     >
+      <div className="w-full p-1 bg-red-400">{message}</div>
       {/* Hero Section */}
       <section className="relative flex flex-col items-center justify-center text-center px-6 py-32">
         <h1
